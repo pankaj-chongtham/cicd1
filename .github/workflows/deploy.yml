@@ -1,4 +1,4 @@
-name: Simple CI/CD Demo
+name: Test CI/CD 
 
 # Trigger when code is merged to release branch
 on:
@@ -19,19 +19,19 @@ jobs:
         Write-Host "Deploying to Production Server..."
         
         # Navigate to the repository directory
-        Set-Location "c:\Users\chon791ad14\Downloads\RAMAIAH\cicddemo\Development Server"
+        Set-Location "C:\Users\chon791ad14\Downloads\RAMAIAH\Demo\CICD\Development"
         
         # Copy app from current directory to Production Server folder
-        New-Item -ItemType Directory -Path "Production Server" -Force
-        Copy-Item "app.py" "Production Server\"
+        New-Item -ItemType Directory -Path "Production" -Force
+        Copy-Item "app.py" "Production\"
         
         # Create simple requirements.txt for production
-        "Flask==2.3.3" | Out-File "Production Server\requirements.txt" -Encoding utf8
+        "Flask==2.3.3" | Out-File "Production\requirements.txt" -Encoding utf8
         
         # Also copy to the actual Production Server folder outside repo
-        New-Item -ItemType Directory -Path "..\Production Server" -Force
-        Copy-Item "app.py" "..\Production Server\"
-        Copy-Item "Production Server\requirements.txt" "..\Production Server\"
+        New-Item -ItemType Directory -Path "..\Production" -Force
+        Copy-Item "app.py" "..\Production\"
+        Copy-Item "Production\requirements.txt" "..\Production\"
         
         Write-Host "Deployment completed!"
         Write-Host "Files deployed to both GitHub and local Production Server!"
@@ -39,7 +39,7 @@ jobs:
     - name: Commit production deployment
       shell: powershell
       run: |
-        Set-Location "c:\Users\chon791ad14\Downloads\RAMAIAH\cicddemo\Development Server"
+        Set-Location "C:\Users\chon791ad14\Downloads\RAMAIAH\Demo\CICD\Development"
         git config --local user.email "chongthamkaj@gmail.com"
         git config --local user.name "pankaj-chongtham"
         git add "Production Server/"
